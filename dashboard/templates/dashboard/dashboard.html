@@ -15,9 +15,9 @@
 
     {% if ongoing_elections %}
     <div
-        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-{% if ongoing_elections|length < 3 %}{{ ongoing_elections|length }}{% else %}3{% endif %} xl:grid-cols-{% if ongoing_elections|length < 3 %}{{ ongoing_elections|length }}{% else %}3{% endif %} gap-8 px-6 pb-6">
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-{% if ongoing_elections|length < 3 %}{{ ongoing_elections|length }}{% else %}3{% endif %} gap-8 px-6 pb-6">
         {% for election in ongoing_elections %}
-        <div class="rounded-md border border-gray-400 shadow-lg bg-[#fdfdfd] p-8 flex flex-col justify-between max-w-[600px]"
+        <div class="rounded-md border border-gray-400 shadow-lg bg-[#fdfdfd] p-8 flex flex-col justify-between w-[100%]"
             style="justify-self: center;">
             <p class="text-[#263238] text-xl">Ongoing Election</p>
             <div class="flex gap-10">
@@ -43,13 +43,14 @@
     {% endif %}
 
 
+
     {% if top_candidates %}
     <h2 class="text-2xl text-[#263238] mt-7 mb-10 flex items-center justify-center w-full">Top Candidates</h2>
 
     <div
-        class="grid grid-cols-1 md:grid-cols-{% if top_candidates|length < 4 %}{{ top_candidates|length }}{% else %}2{% endif %} lg:grid-cols-{% if top_candidates|length < 4 %}{{ top_candidates|length }}{% else %}4{% endif %} gap-8 px-6 pb-6">
+        class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-auto xl:grid-cols-auto gap-8 px-6 pb-6 {% if top_candidates|length <= 2 %}lg:grid-cols-2 xl:grid-cols-2{% elif top_candidates|length <= 3 %}lg:grid-cols-3 xl:grid-cols-3{% else %}lg:grid-cols-4 xl:grid-cols-4{% endif %}">
         {% for candidate in top_candidates %}
-        <div class="bg-gradient-to-b from-gray-300 flex flex-col items-center justify-between rounded-md border border-gray-400 shadow-lg bg-[#fdfdfd] p-8"
+        <div class="bg-gradient-to-b from-gray-300 flex flex-col items-center justify-between rounded-md border border-gray-400 shadow-lg bg-[#fdfdfd] p-8 max-w-[800px]"
             style="min-width: 30rem; max-width: 40rem; justify-self: center;">
             <img class="w-48 h-48 border-4 border-white rounded-full object-cover" src={{ candidate.image.url }}
                 alt="user photo">

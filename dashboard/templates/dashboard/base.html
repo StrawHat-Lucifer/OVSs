@@ -101,10 +101,6 @@
                                     class="block px-4 py-2 text-sm hover:bg-gray-600 text-[#263238] hover:text-white">Settings</a>
                             </li>
                             <li>
-                                <a href="#"
-                                    class="block px-4 py-2 text-sm hover:bg-gray-600 text-[#263238] hover:text-white">Earnings</a>
-                            </li>
-                            <li>
                                 <form action="{% url 'logout' %}" method="post">
                                     {% csrf_token %}
                                     <button type="submit"
