@@ -55,7 +55,11 @@
             <img class="w-48 h-48 border-4 border-white rounded-full object-cover" src={{ candidate.image.url }}
                 alt="user photo">
             <div class="text-center">
-                <p class="text-[#263238] text-3xl font-bold py-4">{{ candidate.name }}</p>
+                <a href="{% url 'candidate_detail' pk=candidate.pk %}">
+                    <p class="text-[#263238] text-3xl font-bold py-4">
+                        {{ candidate.name }}
+                    </p>
+                </a>
                 <a href="{% url 'election_detail' pk=candidate.election.id %}">
                     <p class="text-[#5478f4] text-2xl font-bold">{{ candidate.election.title }}</p>
                 </a>

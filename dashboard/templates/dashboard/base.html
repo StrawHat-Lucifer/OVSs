@@ -54,13 +54,14 @@
                             <a href="/" class="text-[#263238] hover:text-blue-500">Home</a>
                         </li>
                         <li>
-                            <a href="/elections" class="text-[#263238] hover:text-blue-500">Elections</a>
+                            <a href="{% url 'elections_home' %}"
+                                class="text-[#263238] hover:text-blue-500">Elections</a>
                         </li>
                         <li>
                             <a href="#" class="text-[#263238] hover:text-blue-500">Candidates</a>
                         </li>
                         <li>
-                            <a href="#" class="text-[#263238] hover:text-blue-500">History</a>
+                            <a href="{% url 'vote_history' %}" class="text-[#263238] hover:text-blue-500">History</a>
                         </li>
                     </ul>
                 </div>

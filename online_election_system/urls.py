@@ -27,6 +27,8 @@ urlpatterns = [
     path('elections/<int:pk>/candidates/', election_views.election_candidates, name='election_candidates'),
     path('candidate/<int:pk>/', election_views.candidate_detail, name='candidate_detail'),
     path('vote/<int:pk>/', election_views.confirm_vote, name='confirm_vote'),
+    path('vote/delete/<int:pk>/', election_views.confirm_vote_delete, name='confirm_vote_delete'),
+    path('history/', election_views.vote_history, name='vote_history'),
     path('admin/', admin.site.urls),
     path('auth/', include('authentication.urls')),
     path('__reload__/', include('django_browser_reload.urls')),
