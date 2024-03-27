@@ -49,6 +49,7 @@ EXTERNAL_APPS = [
     'authentication',
     'dashboard',
     'elections',
+    'administration',
 ]
 
 INSTALLED_APPS += EXTERNAL_APPS

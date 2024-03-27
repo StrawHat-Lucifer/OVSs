@@ -1,0 +1,48 @@
+{% extends "dashboard/base.html" %}
+
+
+{% block content %}
+
+<div class="container mx-auto">
+    <div class="my-10 flex flex-col items-center justify-center">
+        <div>
+            <span class="text-3xl text-[#263238]">Hello, </span>
+            <span class="text-3xl text-[#263238] font-bold">{{ request.user.first_name }}!</span>
+        </div>
+        <p class="text-xl text-gray-600 my-3">Welcome to Online Voting System.</p>
+
+        <section class="grid gap-6 my-6 md:grid-cols-3 w-full">
+            <div class="p-6 bg-white shadow rounded-2xl">
+                <dl class="space-y-2">
+                    <dt class="text-sm font-medium text-gray-500">Active Elections</dt>
+                    <dd class="text-5xl font-light md:text-7xl">{{ active_elections|length }}</dd>
+                    <dd class="flex items-center space-x-1 text-sm font-medium text-green-500">
+                        <span>{{ total_elections }} Total Elections</span>
+                    </dd>
+                </dl>
+            </div>
+
+            <div class="p-6 bg-white shadow rounded-2xl">
+                <dl class="space-y-2">
+                    <dt class="text-sm font-medium text-gray-500">Candidates</dt>
+                    <dd class="text-5xl font-light md:text-7xl">{{ candidates_running|length }}</dd>
+                    <dd class="flex items-center space-x-1 text-sm font-medium text-green-500">
+                        <span>{{ candidates|length }} Candidates Running</span>
+                    </dd>
+                </dl>
+            </div>
+
+            <div class="p-6 bg-white shadow rounded-2xl">
+                <dl class="space-y-2">
+                    <dt class="text-sm font-medium text-gray-500">Voters</dt>
+                    <dd class="text-5xl font-light md:text-7xl">{{ voters|length }}</dd>
+                    <dd class="flex items-center space-x-1 text-sm font-medium text-green-500">
+                        <span>{{ admins|length|add:1 }} Admin(s)</span>
+                    </dd>
+                </dl>
+            </div>
+        </section>
+    </div>
+</div>
+
+{% endblock content %}

@@ -29,6 +29,9 @@ urlpatterns = [
     path('vote/<int:pk>/', election_views.confirm_vote, name='confirm_vote'),
     path('vote/delete/<int:pk>/', election_views.confirm_vote_delete, name='confirm_vote_delete'),
     path('history/', election_views.vote_history, name='vote_history'),
+    # new admin
+    path('myadmin/', include('administration.urls')),
+    # old admin
     path('admin/', admin.site.urls),
     path('auth/', include('authentication.urls')),
     path('__reload__/', include('django_browser_reload.urls')),

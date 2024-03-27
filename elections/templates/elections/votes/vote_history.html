@@ -52,7 +52,7 @@
                 {% for vote in votes %}
                 <tr class="bg-white border-b hover:bg-gray-50">
                     <td class="px-6 py-4">
-                        <a href="{% url 'candidate_detail' pk=vote.candidate.id}">
+                        <a href="{% url 'candidate_detail' pk=vote.candidate.id %}">
                             {{ vote.candidate.name }}
                         </a>
                     </td>
@@ -62,7 +62,7 @@
                         </a>
                     </td>
                     <td class="px-6 py-4">
-                        {{ vote.created_at|date:"s F Y" }}
+                        {{ vote.created_at|date:"d F Y" }}
                     </td>
                     <td class="px-6 py-4">
                         <div class="flex items-center">

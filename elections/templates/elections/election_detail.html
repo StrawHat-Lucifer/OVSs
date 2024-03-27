@@ -100,8 +100,9 @@
 
 <script>
     // Set the date we're counting down to
-    var countDownDate = new Date("{{ election.end_date|date:'F s, Y H:i:s' }}").getTime();
-    console.log(countDownDate);
+    var countDownDate = new Date("{{ election.end_date|date:'M d, Y H:i:s' }}").getTime();
+    // console.log(countDownDate);
+    // console.log("{{ election.end_date|date:'M d, Y H:i:s' }}")
 
     // Update the count down every 1 second
     var x = setInterval(function () {
