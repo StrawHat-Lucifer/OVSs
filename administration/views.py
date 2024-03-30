@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib import messages
+from django.utils import timezone
+from django.db.models import Count
 from elections.models import Election, Candidate, Vote, Result
 from django.contrib.auth.models import User
 from .forms import ElectionCreateForm, ElectionUpdateForm, CandidateCreateForm
@@ -17,7 +19,18 @@ def dashboard(request):
     voters = User.objects.exclude(pk=request.user.pk)
     admins = User.objects.filter(is_staff=True).count()
 
-    print(candidates)
+    # barchart
+    election_titles =[]
+    candidate_count = []
+    for election in active_elections:
+        election_titles.append(election.title)
+        candidate_count.append(Candidate.objects.filter(election=election).count())
+
+    # doughnut chart
+    male_candidates = Candidate.objects.filter(gender='male').count()
+    female_candidates = Candidate.objects.filter(gender='female').count()
+
+    print(male_candidates, female_candidates)
 
     context = {
         'page_title': 'Admin Dashboard',
@@ -28,6 +41,12 @@ def dashboard(request):
         'candidates_running': candidates_running,
         'voters': voters,
         'admins': admins,
+        # bar chart
+        'election_titles': election_titles,
+        'candidate_count': candidate_count,
+        # doughnut chart
+        'male_candidates': male_candidates,
+        'female_candidates': female_candidates,
     }
     return render(request, 'administration/admin-dashboard.html', context=context)
 
@@ -171,9 +190,6 @@ def candidate_update_form(request, pk):
     }
     return render(request, 'administration/candidates/candidate_update_form.html', context=context)
 
-# RESULTS
-
-
 
 # VOTERS
 
@@ -201,3 +217,49 @@ def confirm_voter_delete(request, pk):
         'voter': voter,
     }
     return render(request, 'administration/voters/confirm_voter_delete.html', context=context)
+
+
+# RESULTS
+
+@staff_member_required()
+def results(request):
+    results = Result.objects.all()
+    active_elections = Election.objects.filter(is_active=True, end_date__gte=timezone.now())
+    active_elections = active_elections.exclude(id__in=[result.election.id for result in results])
+
+    top_candidates = []
+    candidates_with_votes = Candidate.objects.filter(election__in=active_elections).annotate(total_votes=Count('vote'))
+    for election in active_elections:
+        top_candidate = candidates_with_votes.filter(election=election).order_by('-total_votes').first()
+        if top_candidate:
+            top_candidate_votes = Vote.objects.filter(candidate=top_candidate).count()
+            top_candidate.total_votes = top_candidate_votes
+            top_candidates.append(top_candidate)
+
+
+    context = {
+        'page_title': 'Results',
+        'results': results,
+        'active_elections': active_elections,
+        'top_candidates': top_candidates,
+    }
+    return render(request, 'administration/results/admin_results.html', context=context)
+
+
+@staff_member_required()
+def confirm_result(request, pk):
+    candidate = Candidate.objects.get(pk=pk)
+    votes = Vote.objects.filter(candidate=candidate).count()
+
+    Result.objects.create(election=candidate.election, candidate=candidate, votes=votes)
+    election = Election.objects.get(pk=candidate.election.pk)
+    election.is_active = False
+    election.save()
+    messages.success(request, f"{candidate.name} has been confirmed as the winner with {votes} votes")
+
+    return redirect('admin_results')
+
+
+@staff_member_required()
+def result_update_form(request):
+    pass

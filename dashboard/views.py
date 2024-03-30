@@ -9,6 +9,9 @@ from elections.models import Election, Candidate, Vote
 
 @login_required()
 def dashboard(request):
+    if (request.user.is_staff):
+        return redirect('admin-dashboard')
+
     ongoing_elections = Election.objects.filter(is_active=True, start_date__lte=timezone.now())
     ongoing_elections = sorted(ongoing_elections, key=lambda x: x.start_date, reverse=True)
 

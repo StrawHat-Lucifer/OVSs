@@ -28,6 +28,7 @@ urlpatterns = [
     path('candidate/<int:pk>/', election_views.candidate_detail, name='candidate_detail'),
     path('vote/<int:pk>/', election_views.confirm_vote, name='confirm_vote'),
     path('vote/delete/<int:pk>/', election_views.confirm_vote_delete, name='confirm_vote_delete'),
+    path('candidates/', election_views.candidates, name='candidates'),
     path('history/', election_views.vote_history, name='vote_history'),
     # new admin
     path('myadmin/', include('administration.urls')),

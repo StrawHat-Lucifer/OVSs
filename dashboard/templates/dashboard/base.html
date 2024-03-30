@@ -8,6 +8,8 @@
     {% tailwind_css %}
     <title>{{page_title}}</title>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <style>
         * {
             font-family: "Poppins";
@@ -42,7 +44,7 @@
                                 class="text-[#263238] hover:text-blue-500">Candidates</a>
                         </li>
                         <li>
-                            <a href="#" class="text-[#263238] hover:text-blue-500">Results</a>
+                            <a href="{% url 'admin_results' %}" class="text-[#263238] hover:text-blue-500">Results</a>
                         </li>
                         <li>
                             <a href="{% url 'admin_voters' %}" class="text-[#263238] hover:text-blue-500">Voters</a>
@@ -53,14 +55,14 @@
                 <div class="hidden md:flex flex-grow justify-center">
                     <ul class="flex flex-row space-x-8">
                         <li>
-                            <a href="/" class="text-[#263238] hover:text-blue-500">Home</a>
+                            <a href="{% url 'dashboard' %}" class="text-[#263238] hover:text-blue-500">Home</a>
                         </li>
                         <li>
                             <a href="{% url 'elections_home' %}"
                                 class="text-[#263238] hover:text-blue-500">Elections</a>
                         </li>
                         <li>
-                            <a href="#" class="text-[#263238] hover:text-blue-500">Candidates</a>
+                            <a href="{% url 'candidates' %}" class="text-[#263238] hover:text-blue-500">Candidates</a>
                         </li>
                         <li>
                             <a href="{% url 'vote_history' %}" class="text-[#263238] hover:text-blue-500">History</a>
@@ -96,12 +98,8 @@
                         <hr class="mx-3 h-[3px] bg-gray-400 border-0 rounded">
                         <ul class="mb-2">
                             <li>
-                                <a href="#"
+                                <a href="{% url 'dashboard' %}"
                                     class="block px-4 py-2 text-sm hover:bg-gray-600 text-[#263238] hover:text-white">Dashboard</a>
-                            </li>
-                            <li>
-                                <a href="#"
-                                    class="block px-4 py-2 text-sm hover:bg-gray-600 text-[#263238] hover:text-white">Settings</a>
                             </li>
                             <li>
                                 <form action="{% url 'logout' %}" method="post">
@@ -111,27 +109,6 @@
                                         Log out
                                     </button>
                                 </form>
-                            </li>
-                            <hr class="h-px mx-3 border-0 bg-gray-800 md:hidden">
-                            <li>
-                                <a href="#"
-                                    class="block px-4 py-2 text-sm hover:bg-gray-600 hover:rounded-lg text-[#263238] hover:text-white md:hidden">Home</a>
-                            </li>
-                            <li>
-                                <a href="#"
-                                    class="block px-4 py-2 text-sm hover:bg-gray-600 hover:rounded-lg text-[#263238] hover:text-white md:hidden">About</a>
-                            </li>
-                            <li>
-                                <a href="#"
-                                    class="block px-4 py-2 text-sm hover:bg-gray-600 hover:rounded-lg text-[#263238] hover:text-white md:hidden">Services</a>
-                            </li>
-                            <li>
-                                <a href="#"
-                                    class="block px-4 py-2 text-sm hover:bg-gray-600 hover:rounded-lg text-[#263238] hover:text-white md:hidden">Pricing</a>
-                            </li>
-                            <li>
-                                <a href="#"
-                                    class="block px-4 py-2 text-sm hover:bg-gray-600 hover:rounded-lg text-[#263238] hover:text-white md:hidden">Contact</a>
                             </li>
                         </ul>
                     </div>

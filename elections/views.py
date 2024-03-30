@@ -22,20 +22,42 @@ def election_detail(request, pk):
     election = Election.objects.get(pk=pk)
     candidates = Candidate.objects.filter(election=election)
     total_votes = Vote.objects.filter(election=election).count()
-    results = Result.objects.filter(election=election)
+    result = Result.objects.filter(election=election)
     voted = Vote.objects.filter(election=election, voter=request.user).exists()
     election_active = election.is_active and election.end_date > timezone.now()
+    
+    winner_id = 0
+    if result:
+        winner_id = result[0].candidate.id
+
 
     context = {
         'page_title': election.title,
         'election': election,
         'candidates': candidates,
         'total_votes:': total_votes,
-        'results': results,
+        'results': result,
         'voted': voted,
         'election_active': election_active,
+        'winner_id': winner_id
     }
     return render(request, 'elections/election_detail.html', context=context)
+
+
+@login_required()
+def candidates(request):
+    candidates = Candidate.objects.all()
+
+    final_candidates = []
+    for candidate in candidates:
+        candidate.votes = Vote.objects.filter(candidate=candidate).count()
+        final_candidates.append(candidate)
+
+    context = {
+        'page_title': 'Candidates',
+        'candidates': final_candidates,
+    }
+    return render(request, 'elections/candidates/candidates.html', context=context)
 
 
 @login_required()
@@ -43,10 +65,15 @@ def election_candidates(request, pk):
     election = Election.objects.get(pk=pk)
     candidates = Candidate.objects.filter(election=election)
 
+    final_candidates = []
+    for candidate in candidates:
+        candidate.votes = Vote.objects.filter(candidate=candidate).count()
+        final_candidates.append(candidate)
+
     context = {
         'page_title': election.title + ' - Candidates',
         'election': election,
-        'candidates': candidates,
+        'candidates': final_candidates,
     }
     return render(request, 'elections/candidates/election_candidates.html', context=context)
 

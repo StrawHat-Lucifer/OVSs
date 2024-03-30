@@ -17,4 +17,8 @@ urlpatterns = [
     # voters
     path('voters/', views.voters, name='admin_voters'),
     path('voters/delete/<int:pk>/', views.confirm_voter_delete, name='confirm_voter_delete'),
+    # results
+    path('results/', views.results, name='admin_results'),
+    path('results/create/<int:pk>/', views.confirm_result, name='confirm_result'),
+    path('results/update/<int:pk>/', views.result_update_form, name='result_update_form'),
 ]
