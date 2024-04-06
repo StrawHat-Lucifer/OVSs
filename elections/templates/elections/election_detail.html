@@ -24,7 +24,15 @@
 
 <div class="flex items-center justify-center">
     <div class="container my-10 px-4">
-        <h2 class="text-4xl font-semibold mb-4">{{ election.title }}</h2>
+        <div class="flex items-start justify-between mb-6">
+            <h2 class="text-4xl font-semibold mb-4">{{ election.title }}</h2>
+            <a href="{% url 'election_stats' pk=election.pk %}">
+                <button type="button"
+                    class="w-40 shadow-xl py-3 px-4 text-sm font-semibold rounded text-white bg-[#333] hover:bg-black focus:outline-none">
+                    View Stats
+                </button>
+            </a>
+        </div>
         <div class="rounded-xl py-6 bg-cover bg-no-repeat"
             style="height: 70vh; background-image: url({{election.image.url}}); background-repeat: no-repeat;">
         </div>

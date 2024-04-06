@@ -92,7 +92,7 @@
                     <dt class="text-sm font-medium text-gray-500">Time left</dt>
                     <dd id="countdown" class="text-5xl font-light md:text-5xl"></dd>
                     <dd class="flex items-center space-x-1 text-sm font-medium text-red-500 pt-4">
-                        <span>Ends on {{ candidate.election.end_date|date:"s F Y" }}</span>
+                        <span>Ends on {{ candidate.election.end_date|date:"d F Y" }}</span>
                     </dd>
                 </dl>
             </div>
@@ -104,7 +104,7 @@
 <script>
     // Set the date we're counting down to
     var countDownDate = new Date("{{ candidate.election.end_date|date:'M d, Y H:i:s' }}").getTime();
-    console.log(countDownDate);
+    console.log("{{ candidate.election.end_date|date:'M d, Y H:i:s' }}");
 
     // Update the count down every 1 second
     var x = setInterval(function () {

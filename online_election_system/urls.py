@@ -35,6 +35,8 @@ urlpatterns = [
     # old admin
     path('admin/', admin.site.urls),
     path('auth/', include('authentication.urls')),
+    # election stats
+    path('stats/<int:pk>', election_views.election_stats, name='election_stats'),
     path('__reload__/', include('django_browser_reload.urls')),
 ]
 

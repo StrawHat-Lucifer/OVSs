@@ -101,6 +101,47 @@
                                 <a href="{% url 'dashboard' %}"
                                     class="block px-4 py-2 text-sm hover:bg-gray-600 text-[#263238] hover:text-white">Dashboard</a>
                             </li>
+
+                            {% if request.user.is_staff %}
+                            <li>
+                                <a href="{% url 'admin-dashboard' %}"
+                                    class="block px-4 py-2 text-sm hover:bg-gray-600 hover:rounded-lg text-[#263238] hover:text-white md:hidden">Home</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'admin-elections' %}""
+                                    class=" block px-4 py-2 text-sm hover:bg-gray-600 hover:rounded-lg text-[#263238]
+                                    hover:text-white md:hidden">Elections</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'admin_candidates' %}"
+                                    class="block px-4 py-2 text-sm hover:bg-gray-600 hover:rounded-lg text-[#263238] hover:text-white md:hidden">Candidates</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'admin_results' %}"
+                                    class="block px-4 py-2 text-sm hover:bg-gray-600 hover:rounded-lg text-[#263238] hover:text-white md:hidden">Results</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'admin_voters' %}"
+                                    class="block px-4 py-2 text-sm hover:bg-gray-600 hover:rounded-lg text-[#263238] hover:text-white md:hidden">Voters</a>
+                            </li>
+                            {% else %}
+                            <li>
+                                <a href="{% url 'dashboard' %}"
+                                    class="block px-4 py-2 text-sm hover:bg-gray-600 hover:rounded-lg text-[#263238] hover:text-white md:hidden">Home</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'elections_home' %}"
+                                    class="block px-4 py-2 text-sm hover:bg-gray-600 hover:rounded-lg text-[#263238] hover:text-white md:hidden">Electioions</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'candidates' %}"
+                                    class="block px-4 py-2 text-sm hover:bg-gray-600 hover:rounded-lg text-[#263238] hover:text-white md:hidden">Candidates</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'vote_history' %}"
+                                    class="block px-4 py-2 text-sm hover:bg-gray-600 hover:rounded-lg text-[#263238] hover:text-white md:hidden">History</a>
+                            </li>
+                            {% endif %}
                             <li>
                                 <form action="{% url 'logout' %}" method="post">
                                     {% csrf_token %}
