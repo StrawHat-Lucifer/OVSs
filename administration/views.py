@@ -30,8 +30,6 @@ def dashboard(request):
     male_candidates = Candidate.objects.filter(gender='male').count()
     female_candidates = Candidate.objects.filter(gender='female').count()
 
-    print(male_candidates, female_candidates)
-
     context = {
         'page_title': 'Admin Dashboard',
         'total_elections': total_elections,

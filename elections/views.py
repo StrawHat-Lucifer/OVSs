@@ -192,8 +192,6 @@ def election_stats(request, pk):
         vote_date = vote_count['created_at__date']
         index = past_seven_days.index(vote_date)
         vote_data[index] = vote_count['count']
-    
-    print(labels, vote_data)
 
     context = {
         'page_title': election.title + ' - Stats',
