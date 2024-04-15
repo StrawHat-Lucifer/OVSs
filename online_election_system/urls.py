@@ -31,9 +31,9 @@ urlpatterns = [
     path('candidates/', election_views.candidates, name='candidates'),
     path('history/', election_views.vote_history, name='vote_history'),
     # new admin
-    path('myadmin/', include('administration.urls')),
+    path('admin/', include('administration.urls')),
     # old admin
-    path('admin/', admin.site.urls),
+    path('oldadmin/', admin.site.urls),
     path('auth/', include('authentication.urls')),
     # election stats
     path('stats/<int:pk>', election_views.election_stats, name='election_stats'),
